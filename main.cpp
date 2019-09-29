@@ -12,8 +12,8 @@ int main( int argc, char *argv[] )
 
         png_toolkit studTool;
         studTool.load(argv[1]);
+		studTool.changePixelData();
         studTool.save(argv[2]);
-
     }
     catch (const char *str)
     {

@@ -32,3 +32,15 @@ image_data png_toolkit::getPixelData( void ) const
 {
     return imgData;
 }
+
+void png_toolkit::changePixelData()
+{
+	for (unsigned int i = (imgData.h / 2); i < imgData.h; i++) {
+		for (unsigned int j = 0; j < imgData.w; j++) {
+			imgData.pixels[(imgData.w * i + j) * imgData.compPerPixel] = 255;
+			imgData.pixels[(imgData.w * i + j) * imgData.compPerPixel + 1] = 0;
+			imgData.pixels[(imgData.w * i + j) * imgData.compPerPixel + 2] = 0;
+		}
+	}
+}
+
