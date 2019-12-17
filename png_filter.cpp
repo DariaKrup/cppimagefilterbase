@@ -30,9 +30,9 @@ int support_filter::Median(image_data& imgData, config_data& confData, std::vect
 	std::vector<stbi_uc> elements;
 	int pixel;
 	for (int i = mBoarders[0]; i <= mBoarders[2]; i++) {
-		if (i >= 0 && i < confData.boardersOfArea[2]) {
+		if (i >= confData.boardersOfArea[0] && i < confData.boardersOfArea[2]) {
 		    for (int j = mBoarders[1]; j <= mBoarders[3]; j++) {
-				if (j >= 0 && j < confData.boardersOfArea[3]) {
+				if (j >= confData.boardersOfArea[1] && j < confData.boardersOfArea[3]) {
 					pixel = (imgData.w * i + j) * imgData.compPerPixel;
 					elements.push_back(imgData.pixels[pixel]);
 				}
@@ -131,8 +131,8 @@ int Edge::Convolution(image_data& imgData, config_data& confData, std::vector<in
 					}
 					else
 						result -= imgData.pixels[pixel];
-					count++;
 			}
+			count++;
 		}
 	}
 	return Clump(result);
