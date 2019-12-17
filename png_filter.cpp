@@ -14,13 +14,14 @@ void support_filter::Monochrome(image_data& imgData, config_data& confData) {
 	int redD, blueD, greenD;
 	for (int i = confData.boardersOfArea[0]; i < confData.boardersOfArea[2]; i++) {
 		for (int j = confData.boardersOfArea[1]; j < confData.boardersOfArea[3]; j++) {
-			redD = imgData.pixels[(imgData.w * i + j) * imgData.compPerPixel];
-			greenD = imgData.pixels[(imgData.w * i + j) * imgData.compPerPixel + 1];
-			blueD = imgData.pixels[(imgData.w * i + j) * imgData.compPerPixel + 2];
+			int pixel = (imgData.w * i + j) * imgData.compPerPixel;
+			redD = imgData.pixels[pixel];
+			greenD = imgData.pixels[pixel + 1];
+			blueD = imgData.pixels[pixel + 2];
 			int mono = (3 * redD + 6 * greenD + blueD) / 10;
-			imgData.pixels[(imgData.w * i + j) * imgData.compPerPixel] = mono;
-			imgData.pixels[(imgData.w * i + j) * imgData.compPerPixel + 1] = mono;
-			imgData.pixels[(imgData.w * i + j) * imgData.compPerPixel + 2] = mono;
+			imgData.pixels[pixel] = mono;
+			imgData.pixels[pixel + 1] = mono;
+			imgData.pixels[pixel + 2] = mono;
 		}
 	}
 }
@@ -29,7 +30,7 @@ void support_filter::Monochrome(image_data& imgData, config_data& confData) {
 int support_filter::Median(image_data& imgData, config_data& confData, std::vector<int> mBoarders) {
 	std::vector<stbi_uc> elements;
 	int pixel;
-	for (int i = mBoarders[0]; i <= mBoarders[2]; i++) {
+	for (int i = mBoarders[0]; i < mBoarders[2]; i++) {
 		if (i >= confData.boardersOfArea[0] && i < confData.boardersOfArea[2]) {
 		    for (int j = mBoarders[1]; j <= mBoarders[3]; j++) {
 				if (j >= confData.boardersOfArea[1] && j < confData.boardersOfArea[3]) {
@@ -82,7 +83,7 @@ void Blur::Convolution(image_data& imgData, config_data& confData, std::vector<i
 		}
 	}
 	for (int i = 0; i < 3; i++)
-		result[i] /= 9;
+		result[i] /= 3 * imgData.compPerPixel;
 }
 
 void Blur::filter(image_data& imgData, config_data& confData) {
