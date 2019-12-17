@@ -32,9 +32,8 @@ int support_filter::Median(image_data& imgData, config_data& confData, std::vect
 	for (int i = mBoarders[0]; i <= mBoarders[2]; i++) {
 		if (i >= 0 && i < confData.boardersOfArea[2]) {
 		    for (int j = mBoarders[1]; j <= mBoarders[3]; j++) {
-
 				if (j >= 0 && j < confData.boardersOfArea[3]) {
-					pixel = imgData.pixels[(imgData.w * i + j) * imgData.compPerPixel];
+					pixel = (imgData.w * i + j) * imgData.compPerPixel;
 					elements.push_back(imgData.pixels[pixel]);
 				}
 			}
@@ -74,7 +73,7 @@ void Blur::Convolution(image_data& imgData, config_data& confData, std::vector<i
 		if (i >= confData.boardersOfArea[0] && i < confData.boardersOfArea[2]) {
 		    for (int j = mBoarders[1]; j <= mBoarders[3]; j++) {
 				if (j >= confData.boardersOfArea[1] && j < confData.boardersOfArea[3]) {
-					pixel = imgData.pixels[(imgData.w * i + j) * imgData.compPerPixel];
+					pixel = (imgData.w * i + j) * imgData.compPerPixel;
 					result[0] += imgData.pixels[pixel];
 					result[1] += imgData.pixels[pixel + 1];
 					result[2] += imgData.pixels[pixel + 2];
@@ -126,7 +125,7 @@ int Edge::Convolution(image_data& imgData, config_data& confData, std::vector<in
 		}
 	    for (int j = mBoarders[1]; j <= mBoarders[3]; j++) {
 			if (j >= confData.boardersOfArea[1] && j < confData.boardersOfArea[3]) {
-					pixel = imgData.pixels[(imgData.w * i + j) * imgData.compPerPixel];
+					pixel = (imgData.w * i + j) * imgData.compPerPixel;
 					if (count == (size_matrix * size_matrix) / 2) {
 						result += 9 * imgData.pixels[pixel];
 					}
