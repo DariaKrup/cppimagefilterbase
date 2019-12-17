@@ -49,7 +49,7 @@ void Threshold::filter(image_data& imgData, config_data& confData) {
 	Monochrome(imgData, confData);
 	for (int i = confData.boardersOfArea[0]; i < confData.boardersOfArea[2]; i++) {
 		for (int j = confData.boardersOfArea[1]; j < confData.boardersOfArea[3]; j++) {
-			pixel = imgData.pixels[(imgData.w * i + j) * imgData.compPerPixel];			
+			pixel = (imgData.w * i + j) * imgData.compPerPixel;			
 			mBoarders.push_back(i - size_matrix / 2);
 			mBoarders.push_back(j - size_matrix / 2);
 			mBoarders.push_back(i + size_matrix / 2);
@@ -91,7 +91,7 @@ void Blur::filter(image_data& imgData, config_data& confData) {
 	int pixel;
 	for (int i = confData.boardersOfArea[0]; i < confData.boardersOfArea[2]; i++) {
 		for (int j = confData.boardersOfArea[1]; j < confData.boardersOfArea[3]; j++) {
-			pixel = imgData.pixels[(imgData.w * i + j) * imgData.compPerPixel];
+			pixel = (imgData.w * i + j) * imgData.compPerPixel;
 			mBoarders.push_back(i - size_matrix / 2);
 			mBoarders.push_back(j - size_matrix / 2);
 			mBoarders.push_back(i + size_matrix / 2);
@@ -145,7 +145,7 @@ void Edge::filter(image_data& imgData, config_data& confData) {
 	std::vector<int> mBoarders;
 	for (int i = confData.boardersOfArea[0]; i < confData.boardersOfArea[2]; i++) {
 		for (int j = confData.boardersOfArea[1]; j < confData.boardersOfArea[3]; j++) {
-			pixel = imgData.pixels[(imgData.w * i + j) * imgData.compPerPixel];
+			pixel = (imgData.w * i + j) * imgData.compPerPixel;
 			mBoarders.push_back(i - size_matrix / 2);
 			mBoarders.push_back(j - size_matrix / 2);
 			mBoarders.push_back(i + size_matrix / 2);
