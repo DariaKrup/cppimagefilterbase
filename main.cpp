@@ -1,5 +1,10 @@
 #include <iostream>
 #include "png_toolkit.h"
+#include "png_filter.h"
+#include "config_reader.h"
+#include "filter_list.h"
+#include <map>
+
 
 int main( int argc, char *argv[] )
 {
@@ -7,13 +12,22 @@ int main( int argc, char *argv[] )
     // toolkit near test images!
     try
     {
-        if (argc != 3)
+        if (argc != 4)
             throw "Not enough arguments";
 
         png_toolkit studTool;
-        studTool.load(argv[1]);
-		studTool.changePixelData();
-        studTool.save(argv[2]);
+		config_reader configReader;
+		filter_list filterList;
+		std::vector<config_data> cnfData;
+		configReader.read(argv[1]);
+        studTool.load(argv[2]);
+		image_data imgData = studTool.getPixelData();
+		configReader.toAreaBoarders(imgData.h, imgData.w);
+		cnfData = configReader.getConfigData();
+		for (auto& item : cnfData) {
+			filterList.find_filter(item.nameOfFilter)->filter(imgData, item);
+		}
+        studTool.save(argv[3]);
     }
     catch (const char *str)
     {
