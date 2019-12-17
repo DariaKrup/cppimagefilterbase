@@ -9,9 +9,8 @@ void config_reader::read(std::string config_filename) {
 		throw "Cannot open file.";
 	else {
 		std::string line;
-		while (!in.eof()) {
+		while (getline(in, line)) {
 			config_data support_struct;
-			getline(in, line);
 			std::istringstream i(line);
 			for (std::string str; i >> str;) {
 				if (counter == 0)
