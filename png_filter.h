@@ -3,6 +3,7 @@
 #include "png_toolkit.h"
 #include "config_reader.h"
 #include <algorithm>
+#include <cstring>
 
 
 class png_filter {
