@@ -137,10 +137,8 @@ int Edge::Convolution(image_data& imgData, config_data& confData, std::vector<in
 	int result;
 	result = 0;
 	for (int i = mBoarders[0]; i <= mBoarders[2]; i++) {
-		if (i < confData.boardersOfArea[0] || i >= confData.boardersOfArea[2]) {
+		if (i >= confData.boardersOfArea[0] && i < confData.boardersOfArea[2]) {
 				count += size_matrix;
-		}
-		else{
 			for (int j = mBoarders[1]; j <= mBoarders[3]; j++) {
 				if (j >= confData.boardersOfArea[1] && j < confData.boardersOfArea[3]) {
 						pixel = (imgData.w * i + j) * imgData.compPerPixel;
@@ -153,6 +151,9 @@ int Edge::Convolution(image_data& imgData, config_data& confData, std::vector<in
 				count++;
 			}
 		}
+		else
+		    count += size_matrix;
+
 	}
 	return Clump(result);
 }
