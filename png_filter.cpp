@@ -76,7 +76,7 @@ void Threshold::filter(image_data& imgData, config_data& confData) {
 
 void Blur::Convolution(image_data& imgData, config_data& confData, std::vector<int> mBoarders, int* result) {
 	int pixel;
-	int medium = 3 * imgData.compPerPixel;
+	int medium = 9;
 	for (int i = 0; i < 3; i++)
 		result[i] = 0;
 	for (int i = mBoarders[0]; i <= mBoarders[2]; i++) {
