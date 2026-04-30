@@ -36,7 +36,7 @@ project {
             id = "PROJECT_EXT_1028"
             profileId = "amazon-64"
             agentPoolId = "-2"
-            name = "Launch template for AWS Ubuntu (dkrupkina_ubuntu_launch_template)"
+            name = "Launch template for Ubuntu(dkrupkina_ubuntu-launch-template)"
             vpcSubnetId = "subnet-043178c302cabfe37,subnet-0c4f70b91d8800740"
             keyPairName = "daria.krupkina"
             instanceType = "t2.medium"
